@@ -3,12 +3,25 @@
 {% load custom_filters %}
 
 {% block title %}
-Публикация {{ post.id }}
+{{ post.title|censor }}
 {% endblock title %}
 
 {% block content %}
-<h1>{{ post.title|censor }}</h1>
-<h3>{{ post.dateCreation|date:'d-m-Y h:m' }}</h3>
-<p>{{post.text|censor}}</p>
+<p>Дата публикации: {{ post.dateCreation|date:'d-m-Y h:m' }}</p>
+<h3>{{post.text|censor}}</h3>
 
+<form action="{{ post.id }}/delete" target="_blank">
+   <button>Удаление публикации</button>
+    </form>
+<form action="{{ post.id }}/edit" target="_blank">
+   <button>Изменение публикации</button>
+    </form>
+<p>
+    {% if is_not_author %}
+        Не автор <br>
+        <button> <a href="{% url 'upgrade' %}"> Стать автором</a> </button>
+    {% else %}
+        Автор
+    {% endif %}
+</p>
 {% endblock content %}
