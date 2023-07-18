@@ -12,7 +12,6 @@ class PostForm(ModelForm):
 
 
 class BasicSignupForm(SignupForm):
-
     def save(self, request):
         user = super(BasicSignupForm, self).save(request)
         basic_group = Group.objects.get(name='common')

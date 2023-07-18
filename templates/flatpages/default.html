@@ -35,8 +35,13 @@
                         {% block header %}
                         {% endblock header %}
                         <li class="nav-item"><a class="nav-link" href="/about/">О нас</a></li>
-
-
+                       {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" aria-current="page" href="/profile/">{{user.username}}</a></li>
+                            <li class="nav-item"><a class="nav-link" aria-current="page" href="/accounts/logout/">Выход</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" aria-current="page" href="/accounts/login/">Вход</a></li>
+                            <li class="nav-item"><a class="nav-link" aria-current="page" href="/accounts/signup/">Регистрация</a></li>
+                        {% endif %}
 
                     </ul>
                 </div>
